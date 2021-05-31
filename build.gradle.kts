@@ -4,6 +4,7 @@ plugins {
     `maven-publish`
 }
 
+group = "no.mather.temporal"
 version = System.getenv("RELEASE_VERSION")
 
 repositories {
@@ -32,8 +33,6 @@ publishing {
     }
     publications {
         register("gpr", MavenPublication::class) {
-            groupId = "no.mather.temporal"
-            artifactId = "temporal-collections"
             from(components["java"])
         }
     }
