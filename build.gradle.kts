@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "no.github.mather"
-version = "1.0"
+version = System.getenv("RELEASE_VERSION")
 
 repositories {
     mavenCentral()
@@ -21,20 +21,19 @@ java {
 }
 
 publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            version = System.getenv("RELEASE_VERSION")
-            from(components["java"])
-        }
-    }
     repositories {
         maven {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/TheMather1/${rootProject.name}")
             credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
+                username = project.findProperty("gpr.user") as String?
+                password = project.findProperty("gpr.key") as String?
             }
+        }
+    }
+    publications {
+        register<MavenPublication>("jar") {
+            from(components["java"])
         }
     }
 }
