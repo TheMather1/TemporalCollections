@@ -26,8 +26,8 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/TheMather1/${rootProject.name}")
             credentials {
-                username = findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
-                password = findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
             }
         }
     }
