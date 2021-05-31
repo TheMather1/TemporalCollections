@@ -31,8 +31,8 @@ publishing {
     publications {
         register<MavenPublication>("jar") {
             groupId = "no.github.mather"
-            version = System.getenv("RELEASE_VERSION")
             artifactId = rootProject.name
+            version = System.getenv("RELEASE_VERSION")
             from(components["java"])
         }
     }
