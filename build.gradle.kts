@@ -4,7 +4,6 @@ plugins {
     `maven-publish`
 }
 
-group = "no.github.mather"
 version = System.getenv("RELEASE_VERSION")
 
 repositories {
