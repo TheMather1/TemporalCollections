@@ -33,6 +33,7 @@ publishing {
     }
     publications {
         register("gpr", MavenPublication::class) {
+            groupId = "no.mather.temporal"
             from(components["java"])
         }
     }
