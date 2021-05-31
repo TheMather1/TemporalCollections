@@ -32,6 +32,7 @@ publishing {
     }
     publications {
         register("gpr", MavenPublication::class) {
+            groupId = rootProject.name
             from(components["java"])
         }
     }
