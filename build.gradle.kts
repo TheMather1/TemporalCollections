@@ -4,7 +4,6 @@ plugins {
     `maven-publish`
 }
 
-group = "no.mather.temporal"
 version = System.getenv("RELEASE_VERSION")
 
 repositories {
