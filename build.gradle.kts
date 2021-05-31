@@ -33,6 +33,7 @@ publishing {
     publications {
         register("gpr", MavenPublication::class) {
             groupId = rootProject.name
+            artifactId = "temporal-collections"
             from(components["java"])
         }
     }
