@@ -8,17 +8,39 @@ import java.time.temporal.Temporal
  */
 abstract class ChronoSeries<K, R : ChronoRange<K>, T>(private val map: MutableMap<R, T>) where K : Comparable<K>,
                                                                                                K : Temporal {
-    operator fun get(time: K): T? = map.firstNotNullOfOrNull { (k, v) -> if (time in k) v else null }
+    operator fun get(time: K): T? = map[findKey(time)]
+
     operator fun set(range: R, value: T) {
-        remove(range)
         map[range] = value
     }
+
+    private fun findKey(time: K) = strategy.select(map.filterKeys { time in it }.keys)
+
+    fun getAll(time: K) = map.filterKeys { time in it }.values
+
+    var strategy = ChronoSelectionStrategy.FIRST
+
+    val entries: Set<Map.Entry<R,T>>
+        get() = map.entries
+
+    val keys: Set<R>
+        get() = map.keys
+
+    val values: Collection<T>
+        get() = map.values
 
     /**
      * Removes all entries encompassed by the specified [ChronoRange].
      */
     fun remove(range: R) {
         map.keys.filter { range.compareTo(it) in -2..2 }.forEach { map.remove(it) }
+    }
+
+    /**
+     * Removes the entry mapped to the specified key.
+     */
+    fun removeSpecific(key: R){
+        map.remove(key)
     }
 
     /**

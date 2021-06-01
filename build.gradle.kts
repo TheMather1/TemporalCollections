@@ -22,6 +22,7 @@ java {
 
 publishing {
     repositories {
+        mavenCentral()
         maven {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/TheMather1/temporal-collections")
